@@ -1,0 +1,9 @@
+{
+  "name": "theTouches",
+  "author": "Your Name",
+  "description": "A minimalist blog about ideas, craft, and the slow art of making things.",
+  "introExpand": [
+    "Previously, I worked on [long essay writing](/), [web craft](https://example.com), and the occasional [side project](https://example.com).",
+    "This is where I keep the longer thoughts that don't fit in a tweet. Writing here is a way of thinking out loud — slowly and in public."
+  ]
+}

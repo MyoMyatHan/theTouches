@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>theTouches — Why I Chose No Framework</title>
+<meta name="description" content="On building with just Markdown, a tiny script, and a stylesheet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script>(function(){var s=localStorage.getItem('darkMode');var d;if(s!==null){d=s==='true';}else{d=window.matchMedia('(prefers-color-scheme: dark)').matches;}document.documentElement.classList.toggle('u-mode-invert',d);})();</script>
+</head>
+<body>
+<header class="header">
+  <div class="container cc-header">
+    <a href="../index.html" class="header-name-link"><h1 class="header-name">theTouches</h1></a>
+    <a href="../archive.html" class="header-archive-tag">Archive</a>
+    <span class="toggle-switch">
+      <input type="checkbox" id="color-mode" name="Color Mode" class="toggle-checkbox">
+      <label for="color-mode" class="toggle-label" aria-label="Toggle dark mode"></label>
+    </span>
+  </div>
+</header>
+<main class="page-main">
+  <div class="container cc-narrow">
+<article class="rich-text">
+  <h1>Why I Chose No Framework</h1>
+  <p class="post-subtitle">On building with just Markdown, a tiny script, and a stylesheet.</p>
+  <div class="post-date">January 15, 2026</div>
+<p>There's a strong default in web development today: reach for a framework. Static sites get a generator, a dependency tree, a build step with a thousand transitive packages. And then the framework outgrows you.</p>
+<p>This blog is my counterpoint. It's a single Node script, one stylesheet, one small script for the theme toggle, and a folder of Markdown files. That's the entire stack. No framework, no bundler, no package manager, no runtime.</p>
+<blockquote>
+<p>The best tool is the one that disappears entirely — that you stop thinking about, because the thing you're making is what matters.</p>
+</blockquote>
+<h2>What the build actually does</h2>
+<p>The whole generator fits in one file. It reads the post files, parses a few lines of frontmatter, renders the Markdown, and writes static HTML into a <code>public/</code> folder. Then a tiny HTTP server serves that folder. That's it.</p>
+<pre><code class="language-js">// pseudo-code, the real thing is barely longer
+const html = renderMarkdown(body);
+const page = layout({ title, content: html });
+fs.writeFileSync(`public/posts/${slug}.html`, page);</code></pre>
+<p>The advantages of this approach:</p>
+<ul>
+  <li><strong>Nothing to upgrade.</strong> When dependencies publish breaking changes, there's nothing to break here.</li>
+  <li><strong>Nothing to install.</strong> <code>node build.js</code> runs with the standard library alone.</li>
+  <li><strong>It still works in twenty years.</strong> The output is plain HTML and CSS, served by anything.</li>
+</ul>
+<h2>When you should <em>not</em> do this</h2>
+<p>Honesty requires the other side. If your blog needs comments, search, tags, or dozens of contributors editing at once, a generator with a community behind it is the right tool. My needs are deliberately small — write, build, publish — so my tools can be too.</p>
+<p>The goal isn't purity. It's that the distance between <em>thought</em> and <em>published</em> should be as short as possible.</p>
+<hr>
+<p>There's real value in remembering how little software is actually needed to publish words on the internet. A text editor, a folder of files, and a server. Everything else is taste.</p>
+
+</article>
+  </div>
+</main>
+<script src="../main.js"></script>
+</body>
+</html>
