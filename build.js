@@ -306,10 +306,15 @@ function loadPosts() {
 
     const basename = file.replace(/\.md$/, '');
     let slug = basename;
-    const datePrefix = /^(\d{4})-(\d{2})-(\d{2})-(.+)$/.exec(basename);
+    const datePrefix = /^(\d{4})-(\d{1,2})-(\d{1,2})-(.+)$/.exec(basename);
     if (datePrefix) {
       slug = datePrefix[4];
-      if (!meta.date) meta.date = datePrefix[1] + '-' + datePrefix[2] + '-' + datePrefix[3];
+      if (!meta.date) {
+        meta.date =
+          datePrefix[1] +
+          '-' + datePrefix[2].padStart(2, '0') +
+          '-' + datePrefix[3].padStart(2, '0');
+      }
     }
     if (meta.slug) slug = meta.slug;
 
