@@ -1,9 +1,6 @@
-# theTouches
+# Myo Myat Han — Portfolio
 
-A minimalist, framework-free static blog. No runtime dependencies — just Node.js built-ins.
-
-Design is modeled after darioamodei.com: Newsreader serif type, a narrow 620px reading column,
-thin-underlined links, bulleted post lists, and a light/dark theme toggle.
+A minimal, framework-free personal portfolio with a biography, selected work, and links to GitHub and LinkedIn. The layout takes cues from darioamodei.com: Newsreader serif type, generous whitespace, understated links, and a light/dark theme toggle.
 
 ## Requirements
 
@@ -16,9 +13,13 @@ npm run build   # compile content/ -> public/
 npm run serve   # preview at http://localhost:8080
 ```
 
-## Adding a post
+## Updating the portfolio
 
-Create a new Markdown file in `content/posts/`. Name it `YYYY-MM-DD-slug.md`.
+Edit the project data and portfolio markup in `build.js` to update the Projects, Blog, Contact, and skills sections. Update `content/config.json` for the site name and description. Blog articles are authored in `content/posts/`.
+
+## Adding a writing page
+
+Create a Markdown file in `content/posts/`. Name it `YYYY-MM-DD-slug.md`.
 
 ```markdown
 ---

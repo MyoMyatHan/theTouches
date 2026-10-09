@@ -360,7 +360,11 @@ function pageShell({ rel, title, description, content }) {
 <header class="header">
   <div class="container cc-header">
     <a href="${rel}index.html" class="header-name-link"><h1 class="header-name">${escapeHtml(site.name)}</h1></a>
-    <a href="${rel}archive.html" class="header-archive-tag">Archive</a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="${rel}index.html#projects">Projects</a>
+      <a href="${rel}index.html#blog">Blog</a>
+      <a href="${rel}index.html#contact">Contact</a>
+    </nav>
     <span class="toggle-switch">
       <input type="checkbox" id="color-mode" name="Color Mode" class="toggle-checkbox">
       <label for="color-mode" class="toggle-label" aria-label="Toggle dark mode"></label>
@@ -383,25 +387,39 @@ function bulletItem(rel, post) {
 }
 
 function buildIndex(site, indexBodyHtml, posts) {
-  const sections = [];
-  const categories = [...new Set(posts.map((p) => p.category))].filter(Boolean);
-
-  sections.push(`<section>\n${indexBodyHtml}</section>`);
-
-  if (categories.length > 0) {
-    for (const cat of categories) {
-      const group = posts.filter((p) => p.category === cat);
-      sections.push(`<section class="u-mt-sm">\n<h2 class="h3">${escapeHtml(cat)}</h2>\n<ul class="bullet-list">\n${group.map((p) => bulletItem('', p)).join('\n')}\n</ul>\n</section>`);
-    }
-  } else {
-    sections.push(`<section class="u-mt-sm">\n<h2 class="h3">Posts</h2>\n<ul class="bullet-list">\n${posts.map((p) => bulletItem('', p)).join('\n')}\n</ul>\n</section>`);
-  }
+  const projectData = [
+    { name: 'Todo + Notes', detail: 'A simple new-tab extension that keeps your todo list in view.', href: 'https://chromewebstore.google.com/detail/todo-+-notes/okfdmnaeneagdfkkkdgmljpbdgomlgmj', tag: 'Browser extension' },
+    { name: 'FlashPost AI', detail: 'Generate AI-powered sale posts.', href: 'https://flashpostai.vercel.app/', tag: 'AI · Web app' },
+    { name: 'Azure Static App', detail: 'Surface scratch to Azure.', href: 'https://icy-river-02c78de00.6.azurestaticapps.net/', tag: 'Azure' },
+    { name: 'FAHH Sound', detail: 'Plays a FAHH sound when power is disconnected or electricity cuts out.', href: 'https://github.com/MyoMyatHan/FAHH-Sound/releases/tag/FAHH', tag: 'Desktop app' },
+  ];
+  const projectCards = projectData.map((p, i) => `<a class="project-card" href="${p.href}" target="_blank" rel="noreferrer"><span class="project-number">0${i + 1}</span><span class="project-info"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.detail)}</span></span><span class="project-tag">${escapeHtml(p.tag)}</span><span class="project-arrow" aria-hidden="true">↗</span></a>`).join('\n');
+  const latestPosts = posts.slice(0, 4).map((p) => `<li class="blog-item"><a href="posts/${p.slug}.html">${escapeHtml(p.title)}</a><time datetime="${escapeHtml(p.dateStr)}">${formatMonthYear(p.date)}</time></li>`).join('\n');
+  const sections = `<section class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow">Software Developer · .NET &amp; Vue.js</p>
+  <h1 id="hero-title">Myo Myat Han</h1>
+  <p class="hero-copy">Building useful software for the web, desktop, and everyday life.</p>
+  <p class="hero-links"><a href="https://github.com/MyoMyatHan">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.myomyathan.me/">myomyathan.me <span aria-hidden="true">↗</span></a><a href="https://linkedin.com/in/myo-myat-han">LinkedIn <span aria-hidden="true">↗</span></a></p>
+</section>
+<section class="portfolio-section" id="projects">
+  <p class="section-index">01 / Projects</p>
+  <div class="section-body"><p class="section-lede">Small tools and apps built to make everyday tasks a little easier.</p><div class="project-list">${projectCards}</div><p class="section-footnote">More experiments and source code on <a href="https://github.com/MyoMyatHan">GitHub ↗</a></p></div>
+</section>
+<section class="portfolio-section" id="blog">
+  <p class="section-index">02 / Blog</p>
+  <div class="section-body"><p class="section-lede">Notes on learning and building.</p><ul class="blog-list"><li class="blog-item"><a href="https://medium.com/@16hrscode">တန်ဖိုးရှိတဲ့ ကျွမ်းကျင်မူတွေကို ဘယ်လိုတည်ဆောက်မလဲ</a><span class="blog-source">Medium</span></li>${latestPosts}</ul><a class="text-link" href="archive.html">More writing →</a></div>
+</section>
+<section class="portfolio-section" id="contact">
+  <p class="section-index">03 / Contact</p>
+  <div class="section-body"><p class="section-lede">Have an interesting idea or want to say hello?</p><p><a href="mailto:myomyathan.dev@gmail.com">myomyathan.dev@gmail.com</a></p><p class="contact-links"><a href="https://linkedin.com/in/myo-myat-han">LinkedIn ↗</a><a href="https://github.com/MyoMyatHan">GitHub ↗</a></p><div class="skills-list"><p><strong>Frontend</strong><span>Vue.js</span></p><p><strong>Backend</strong><span>C · .NET · ASP.NET Core</span></p><p><strong>Data</strong><span>SQL Server · EF Core · Dapper</span></p><p><strong>Tools</strong><span>Azure · Docker · Linux · Git</span></p></div></div>
+</section>
+<footer class="site-footer"><span>© ${new Date().getFullYear()} Myo Myat Han</span><a href="#hero-title">Back to top ↑</a></footer>`;
 
   return pageShell({
     rel: '',
     title: site.name,
     description: site.description,
-    content: sections.join('\n\n'),
+    content: sections,
   });
 }
 
