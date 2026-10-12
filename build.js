@@ -446,10 +446,13 @@ function buildPost(site, post) {
     ? `<p class="post-subtitle">${inline(post.subtitle)}</p>\n`
     : '';
   const content =
-`<article class="rich-text">
+  `<article class="post-page">
+  <div class="rich-text">
   <h1>${escapeHtml(post.title)}</h1>
   ${subtitle}  <div class="post-date">${formatDate(post.date)}</div>
-${post.bodyHtml}
+  ${post.bodyHtml}
+  </div>
+  <a class="post-back-link" href="../index.html#blog">← Back to writing</a>
 </article>`;
 
   return pageShell({

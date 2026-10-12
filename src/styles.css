@@ -375,6 +375,19 @@ p {
    Post page
    ============================================================ */
 
+.post-back-link {
+  display: inline-block;
+  margin: 0 0 2rem;
+  color: var(--colors--text-secondary);
+  text-decoration: none;
+}
+
+.post-back-link:hover {
+  color: var(--colors--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .post-date {
   font-size: 0.9em;
   color: var(--colors--text-secondary);
