@@ -398,11 +398,15 @@ function buildIndex(site, indexBodyHtml, posts) {
   const projectCards = projectData.map((p, i) => `<a class="project-card" href="${p.href}" ${p.download ? 'download' : 'target="_blank" rel="noreferrer"'}><span class="project-number">0${i + 1}</span><span class="project-info"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.detail)}</span></span><span class="project-tag">${escapeHtml(p.tag)}</span><span class="project-arrow" aria-hidden="true">${p.download ? '↓' : '↗'}</span></a>`).join('\n');
   const latestPosts = posts.slice(0, 4).map((p) => `<li class="blog-item"><a href="posts/${p.slug}.html">${escapeHtml(p.title)}</a><time datetime="${escapeHtml(p.dateStr)}">${formatMonthYear(p.date)}</time></li>`).join('\n');
   const sections = `<section class="hero" aria-labelledby="hero-title">
-  <p class="eyebrow">Software Developer · .NET &amp; Vue.js</p>
-  <div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="hero-body">
+  <div class="hero-mark" aria-hidden="true"><img src="images/wave-animation.gif" width="150" height="150" alt=""></div>
+  <div class="hero-content">
   <h1 id="hero-title">Building useful software.</h1>
   <p class="hero-copy">For the web, desktop, and everyday life.</p>
+  <p class="eyebrow">Software Developer · .NET &amp; Vue.js</p>
   <p class="hero-links"><a href="https://github.com/MyoMyatHan">GitHub <span aria-hidden="true">↗</span></a><a href="https://linkedin.com/in/myo-myat-han">LinkedIn <span aria-hidden="true">↗</span></a></p>
+  </div>
+  </div>
 </section>
 <section class="portfolio-section" id="projects">
   <p class="section-index">01 / Projects</p>
