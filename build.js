@@ -388,14 +388,14 @@ function bulletItem(rel, post) {
 
 function buildIndex(site, indexBodyHtml, posts) {
   const projectData = [
-    { name: 'Android VPN', detail: 'A native Kotlin VPN app powered by AmneziaWG, with a Node.js and Express API that automatically registers devices and configures connections. Includes per-device keys, 30-minute sessions, and automatic cleanup of expired access on a Linux server.', href: 'https://github.com/MyoMyatHan/vpn', tag: 'Android · Networking' },
+    { name: 'Halo — Android VPN', detail: 'A native Kotlin VPN app powered by AmneziaWG, with automatic device registration and 30-minute sessions. Download the signed APK for Android 8.0 or newer. If you have an older test version, uninstall it before installing this release.', href: 'downloads/halo-1.0.apk', tag: 'Download APK · Android', download: true },
     { name: 'FlashPost AI', detail: 'Generate AI-powered sale posts.', href: 'https://flashpostai.vercel.app/', tag: 'AI · Web app' },
     { name: 'MyanTrade Telegram Bot', detail: 'Automatically shares daily commodity prices from MyanTrade to a Telegram group. Handles price tables, PDFs, and images, with duplicate tracking to avoid repeat posts. Built with Node.js and Playwright, scheduled through GitHub Actions, and already in use in my Telegram group.', href: 'https://github.com/MyoMyatHan/DailyCommodityPrices', tag: 'Telegram · Automation' },
     { name: 'Todo + Notes', detail: 'A simple new-tab extension that keeps your todo list in view.', href: 'https://chromewebstore.google.com/detail/todo-+-notes/okfdmnaeneagdfkkkdgmljpbdgomlgmj', tag: 'Browser extension' },
     { name: 'Azure Static App', detail: 'Surface scratch to Azure.', href: 'https://icy-river-02c78de00.6.azurestaticapps.net/', tag: 'Azure' },
     { name: 'FAHH Sound', detail: 'Plays a FAHH sound when power is disconnected or electricity cuts out.', href: 'https://github.com/MyoMyatHan/FAHH-Sound/releases/tag/FAHH', tag: 'Desktop app' },
   ];
-  const projectCards = projectData.map((p, i) => `<a class="project-card" href="${p.href}" target="_blank" rel="noreferrer"><span class="project-number">0${i + 1}</span><span class="project-info"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.detail)}</span></span><span class="project-tag">${escapeHtml(p.tag)}</span><span class="project-arrow" aria-hidden="true">↗</span></a>`).join('\n');
+  const projectCards = projectData.map((p, i) => `<a class="project-card" href="${p.href}" ${p.download ? 'download' : 'target="_blank" rel="noreferrer"'}><span class="project-number">0${i + 1}</span><span class="project-info"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.detail)}</span></span><span class="project-tag">${escapeHtml(p.tag)}</span><span class="project-arrow" aria-hidden="true">${p.download ? '↓' : '↗'}</span></a>`).join('\n');
   const latestPosts = posts.slice(0, 4).map((p) => `<li class="blog-item"><a href="posts/${p.slug}.html">${escapeHtml(p.title)}</a><time datetime="${escapeHtml(p.dateStr)}">${formatMonthYear(p.date)}</time></li>`).join('\n');
   const sections = `<section class="hero" aria-labelledby="hero-title">
   <p class="eyebrow">Software Developer · .NET &amp; Vue.js</p>
@@ -489,6 +489,7 @@ for (const post of posts) {
 
 fs.copyFileSync(path.join(SRC, 'styles.css'), path.join(PUBLIC, 'styles.css'));
 fs.copyFileSync(path.join(SRC, 'main.js'), path.join(PUBLIC, 'main.js'));
+fs.cpSync(path.join(ROOT, 'static'), PUBLIC, { recursive: true });
 
 console.log(`Built ${PUBLIC}`);
 console.log(`  - ${posts.length} post(s)`);

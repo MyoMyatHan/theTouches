@@ -3,6 +3,9 @@ public/
 
 # Node / tools
 node_modules/
+.local-release/
+*.jks
+*.keystore
 
 # OS / editor junk
 .DS_Store
