@@ -388,6 +388,7 @@ function bulletItem(rel, post) {
 
 function buildIndex(site, indexBodyHtml, posts) {
   const projectData = [
+    { name: 'Android VPN', detail: 'A native Kotlin VPN app powered by AmneziaWG, with a Node.js and Express API that automatically registers devices and configures connections. Includes per-device keys, 30-minute sessions, and automatic cleanup of expired access on a Linux server.', href: 'https://github.com/MyoMyatHan/vpn', tag: 'Android · Networking' },
     { name: 'FlashPost AI', detail: 'Generate AI-powered sale posts.', href: 'https://flashpostai.vercel.app/', tag: 'AI · Web app' },
     { name: 'MyanTrade Telegram Bot', detail: 'Automatically shares daily commodity prices from MyanTrade to a Telegram group. Handles price tables, PDFs, and images, with duplicate tracking to avoid repeat posts. Built with Node.js and Playwright, scheduled through GitHub Actions, and already in use in my Telegram group.', href: 'https://github.com/MyoMyatHan/DailyCommodityPrices', tag: 'Telegram · Automation' },
     { name: 'Todo + Notes', detail: 'A simple new-tab extension that keeps your todo list in view.', href: 'https://chromewebstore.google.com/detail/todo-+-notes/okfdmnaeneagdfkkkdgmljpbdgomlgmj', tag: 'Browser extension' },
