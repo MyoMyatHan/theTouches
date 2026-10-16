@@ -9,6 +9,7 @@ A minimal, framework-free personal portfolio with a biography, selected work, an
 ## Quick start
 
 ```sh
+npm ci          # install the frontmatter parser
 npm run build   # compile content/ -> public/
 npm run serve   # preview at http://localhost:8080
 ```
@@ -18,6 +19,22 @@ npm run serve   # preview at http://localhost:8080
 Edit the project data and portfolio markup in `build.js` to update the Projects, Blog, Contact, and skills sections. Update `content/config.json` for the site name and description. Blog articles are authored in `content/posts/`.
 
 ## Adding a writing page
+
+### Publish from your browser
+
+The `.pages.yml` configuration connects Pages CMS to `content/posts/`.
+After the setup changes are committed to GitHub, open https://app.pagescms.org,
+select this repository and the `main` branch, and open **Articles**.
+Create an article, fill in its title and date, write in the visual editor, and save.
+Saving on `main` publishes through the existing GitHub Pages workflow once its build finishes.
+Saving is publishing: this configuration does not provide a separate draft state or scheduled publishing.
+The article date controls sorting, not whether an article is published.
+
+Upload article images through the editor. They are stored in
+`static/images/articles/` and copied into the generated site during the build.
+Keep existing filenames when editing articles to preserve their URLs.
+
+### Write a file manually (optional)
 
 Create a Markdown file in `content/posts/`. Name it `YYYY-MM-DD-slug.md`.
 

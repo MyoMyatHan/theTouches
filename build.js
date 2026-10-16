@@ -2,7 +2,7 @@
 
 /*
  * theTouches — static site generator.
- * Zero dependencies: only Node.js built-ins (fs, path).
+ * Uses Node.js built-ins and yaml for CMS-compatible frontmatter.
  *
  * Reads content/ (config.json, index.md, posts/*.md) and writes public/.
  * Run with: node build.js
@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const YAML = require('yaml');
 
 const ROOT = __dirname;
 const CONTENT = path.join(ROOT, 'content');
@@ -280,11 +281,11 @@ function parseFrontmatter(src) {
   const meta = {};
   const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(src);
   if (m) {
-    for (const line of m[1].split(/\r?\n/)) {
-      const kv = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(line);
-      if (kv) meta[kv[1]] = kv[2].trim();
+    const parsed = YAML.parse(m[1]) || {};
+    if (typeof parsed !== 'object' || Array.isArray(parsed)) {
+      throw new Error('Post frontmatter must be a YAML object');
     }
-    return { meta, body: src.slice(m[0].length) };
+    return { meta: parsed, body: src.slice(m[0].length) };
   }
   return { meta, body: src };
 }
