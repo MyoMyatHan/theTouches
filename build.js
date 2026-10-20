@@ -405,7 +405,7 @@ function buildIndex(site, indexBodyHtml, posts) {
       throw new Error(`Course progress must be a number from 0 to 100: ${course.title}`);
     }
     return `<li class="course-item">
-  <div class="course-heading"><h3 id="course-${i}">${escapeHtml(course.title)}</h3><span class="course-status">${hasProgress ? `${course.progress}% complete` : 'In progress'}</span></div>
+  <div class="course-heading"><h3 id="course-${i}">${course.url ? `<a href="${escapeHtml(course.url)}" target="_blank" rel="noreferrer">${escapeHtml(course.title)}</a>` : escapeHtml(course.title)}</h3><span class="course-status">${hasProgress ? `${course.progress}% complete` : 'In progress'}</span></div>
   ${course.provider ? `<p class="course-provider">${escapeHtml(course.provider)}</p>` : ''}
   ${course.currentTopic ? `<p class="course-topic">${escapeHtml(course.currentTopic)}</p>` : ''}
   ${hasProgress ? `<progress class="course-progress" value="${course.progress}" max="100" aria-labelledby="course-${i}">${course.progress}% complete</progress>` : ''}

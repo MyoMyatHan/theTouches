@@ -6,11 +6,13 @@
   "courses": [
     {
       "title": "Building with the Claude API",
+      "url": "https://anthropic.skilljar.com/claude-with-the-anthropic-api",
       "provider": "Skilljar",
       "progress": 36
     },
     {
       "title": "CS146S: The Modern Software Developer",
+      "url": "https://themodernsoftware.dev/",
       "currentTopic": "Week 1 · The Internal of Coding Agents",
       "progress": null
     }

@@ -18,7 +18,7 @@ npm run serve   # preview at http://localhost:8080
 
 Edit the project data and portfolio markup in `build.js` to update the Projects, Blog, Contact, and skills sections. Update `content/config.json` for the site name and description. Blog articles are authored in `content/posts/`.
 
-Update the `courses` array in `content/config.json` for the Currently learning section. Each course has a `title`, an optional `provider` and `currentTopic`, and a `progress` percentage from 0 to 100. Set `progress` to `null` to show “In progress” without a percentage or progress bar. Run `npm run build` after updating course progress.
+Update the `courses` array in `content/config.json` for the Currently learning section. Each course has a `title`, an optional `url`, `provider`, and `currentTopic`, and a `progress` percentage from 0 to 100. Set `progress` to `null` to show “In progress” without a percentage or progress bar. Run `npm run build` after updating course progress.
 
 ## Adding a writing page
 
