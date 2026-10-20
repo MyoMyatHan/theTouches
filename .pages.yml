@@ -39,3 +39,44 @@ content:
         required: true
         options:
           format: markdown
+media:
+  input: static/images/articles
+  output: ../images/articles
+
+content:
+  - name: articles
+    label: Articles
+    type: collection
+    path: content/posts
+    format: yaml-frontmatter
+    subfolders: false
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, date, category]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Article date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+          time: false
+      - name: category
+        label: Category
+        type: string
+      - name: subtitle
+        label: Subtitle
+        type: string
+      - name: body
+        label: Article
+        type: rich-text
+        required: true
+        options:
+          format: markdown
