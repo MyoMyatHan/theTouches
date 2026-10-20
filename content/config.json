@@ -2,5 +2,17 @@
   "name": "Myo Myat Han",
   "author": "Myo Myat Han",
   "description": "Portfolio of Myo Myat Han — selected work, background, and ways to connect.",
-  "introExpand": []
+  "introExpand": [],
+  "courses": [
+    {
+      "title": "Building with the Claude API",
+      "provider": "Skilljar",
+      "progress": 36
+    },
+    {
+      "title": "CS146S: The Modern Software Developer",
+      "currentTopic": "Week 1 · The Internal of Coding Agents",
+      "progress": null
+    }
+  ]
 }

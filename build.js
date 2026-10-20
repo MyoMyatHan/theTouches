@@ -364,6 +364,7 @@ function pageShell({ rel, title, description, content }) {
     <nav class="header-nav" aria-label="Main navigation">
       <a href="${rel}index.html#projects">Projects</a>
       <a href="${rel}index.html#blog">Blog</a>
+      <a href="${rel}index.html#learning">Learning</a>
       <a href="${rel}index.html#contact">Contact</a>
     </nav>
     <span class="toggle-switch">
@@ -398,6 +399,18 @@ function buildIndex(site, indexBodyHtml, posts) {
   ];
   const projectCards = projectData.map((p, i) => `<a class="project-card" href="${p.href}" ${p.download ? 'download' : 'target="_blank" rel="noreferrer"'}><span class="project-number">0${i + 1}</span><span class="project-info"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.detail)}</span></span><span class="project-tag">${escapeHtml(p.tag)}</span><span class="project-arrow" aria-hidden="true">${p.download ? '↓' : '↗'}</span></a>`).join('\n');
   const latestPosts = posts.slice(0, 4).map((p) => `<li class="blog-item"><a href="posts/${p.slug}.html">${escapeHtml(p.title)}</a><time datetime="${escapeHtml(p.dateStr)}">${formatMonthYear(p.date)}</time></li>`).join('\n');
+  const courseItems = (site.courses || []).map((course, i) => {
+    const hasProgress = course.progress !== null && course.progress !== undefined;
+    if (hasProgress && (!Number.isFinite(course.progress) || course.progress < 0 || course.progress > 100)) {
+      throw new Error(`Course progress must be a number from 0 to 100: ${course.title}`);
+    }
+    return `<li class="course-item">
+  <div class="course-heading"><h3 id="course-${i}">${escapeHtml(course.title)}</h3><span class="course-status">${hasProgress ? `${course.progress}% complete` : 'In progress'}</span></div>
+  ${course.provider ? `<p class="course-provider">${escapeHtml(course.provider)}</p>` : ''}
+  ${course.currentTopic ? `<p class="course-topic">${escapeHtml(course.currentTopic)}</p>` : ''}
+  ${hasProgress ? `<progress class="course-progress" value="${course.progress}" max="100" aria-labelledby="course-${i}">${course.progress}% complete</progress>` : ''}
+</li>`;
+  }).join('\n');
   const sections = `<section class="hero" aria-labelledby="hero-title">
   <div class="hero-body">
   <div class="hero-mark" aria-hidden="true"><img src="images/wave-animation.gif" width="150" height="150" alt=""></div>
@@ -417,8 +430,12 @@ function buildIndex(site, indexBodyHtml, posts) {
   <p class="section-index">02 / Blog</p>
   <div class="section-body"><p class="section-lede">Notes on learning and building.</p><ul class="blog-list"><li class="blog-item"><a href="https://medium.com/@16hrscode">တန်ဖိုးရှိတဲ့ ကျွမ်းကျင်မူတွေကို ဘယ်လိုတည်ဆောက်မလဲ</a><span class="blog-source">Medium</span></li>${latestPosts}</ul><a class="text-link" href="archive.html">More writing →</a></div>
 </section>
+<section class="portfolio-section" id="learning" aria-labelledby="learning-title">
+  <h2 class="section-index" id="learning-title">03 / Currently learning</h2>
+  <div class="section-body"><p class="section-lede">Courses I’m working through.</p><ul class="course-list">${courseItems}</ul></div>
+</section>
 <section class="portfolio-section" id="contact">
-  <p class="section-index">03 / Contact</p>
+  <p class="section-index">04 / Contact</p>
   <div class="section-body"><p class="section-lede">Have an interesting idea or want to say hello?</p><p><a href="mailto:myomyathan.dev@gmail.com">myomyathan.dev@gmail.com</a></p><p class="contact-links"><a href="https://linkedin.com/in/myo-myat-han">LinkedIn ↗</a><a href="https://github.com/MyoMyatHan">GitHub ↗</a></p><div class="skills-list"><p><strong>Frontend</strong><span>Vue.js</span></p><p><strong>Backend</strong><span>C · .NET · ASP.NET Core</span></p><p><strong>Data</strong><span>SQL Server · EF Core · Dapper</span></p><p><strong>Tools</strong><span>Azure · Docker · Linux · Git</span></p></div></div>
 </section>
 <footer class="site-footer"><span>© ${new Date().getFullYear()} Myo Myat Han</span><a href="#top">Back to top ↑</a></footer>`;
