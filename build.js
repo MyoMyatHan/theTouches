@@ -390,6 +390,7 @@ function bulletItem(rel, post) {
 
 function buildIndex(site, indexBodyHtml, posts) {
   const projectData = [
+    { name: 'GoodCall', detail: 'An in-progress learning app where users learn C# as interns, gain experience and coins to level up, buy workspace gear, and decorate their profiles.', href: 'https://goodcall.47-129-163-170.sslip.io/', tag: 'Learning · Web app' },
     { name: 'Halo — Android VPN', detail: 'A native Kotlin VPN app powered by AmneziaWG, with automatic device registration and 30-minute sessions. Download the signed APK for Android 8.0 or newer. If you have an older test version, uninstall it before installing this release.', href: 'downloads/halo-1.0.apk', tag: 'Download APK · Android', download: true },
     { name: 'FlashPost AI', detail: 'Generate AI-powered sale posts.', href: 'https://flashpostai.vercel.app/', tag: 'AI · Web app' },
     { name: 'MyanTrade Telegram Bot', detail: 'Automatically shares daily commodity prices from MyanTrade to a Telegram group. Handles price tables, PDFs, and images, with duplicate tracking to avoid repeat posts. Built with Node.js and Playwright, scheduled through GitHub Actions, and already in use in my Telegram group.', href: 'https://github.com/MyoMyatHan/DailyCommodityPrices', tag: 'Telegram · Automation' },
